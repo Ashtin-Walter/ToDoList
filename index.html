@@ -10,7 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/128/7739/7739845.png">
     <link rel="stylesheet" href="main.css" />
     <script defer src="script.js"></script>
@@ -19,32 +19,40 @@
   <body class="mainview">
     <h1 class="title">Stuff I need to do</h1>
 
-    <div class="all-tasks">
-      <h2 class="task-list-title">My lists</h2>
+    <div class="all-tasks text-center">
+      <h2 class="badge text-bg-light">My Lists</h2>
       <ul class="task-list" data-lists></ul>
 
-      <form action="" data-new-list-form>
+      <form action="" class="input-group" data-new-list-form>
         <input 
           type="text"
-          class="new list"
+          class="new list w-75 bg-dark text-light"
           data-new-list-input
           placeholder="new list name"
           aria-label="new list name"
         />
-        <button class="btn create" aria-label="create new list">+</button>
+        <button class="btn create input-group-text" aria-label="create new list">+</button>
       </form>
     </div>
 
-    <div class="todo-list" data-list-display-container>
-      <div class="todo-header">
-        <h2 class="list-title" data-list-title>Create A New List To Create Tasks</h2>
-        <p class="task-count" data-list-count>No tasks </p>
-      </div>
-
-      <div class="todo-body">
-        <div class="tasks" data-tasks></div>
-
-        <div class="new-task-creator">
+    <div class="todo-list rounded" data-list-display-container>
+      <div class="card text-center">
+        <div class="card-header d-flex justify-content-between ">
+          
+            <h2 class="badge text-bg-dark" data-list-title>Create A New List To Create Tasks</h2>
+            <p class="task-count badge text-bg-warning" data-list-count>No tasks </p>
+          
+        </div>
+        <div class="card-body">
+          
+          
+          <p class="card-text"><div class="todo-body">
+            <div class="tasks" data-tasks></div>
+    
+           
+            
+          </div></p>
+          <div class="new-task-creator">
             <form action="" data-new-task-form>
                 <input 
                   type="text"
@@ -57,11 +65,18 @@
               </form>
         </div>
 
-        <div class="delete-stuff">
-          <button class="btn delete btn-outline-success" data-clear-complete-tasks-button><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>Clear Completed</button>
-          <button class="btn delete btn-outline-danger" data-delete-list-button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>Delete List</button>
+        </div>
+        <div class="card-footer text-body-secondary">
+          <div class="delete-stuff">
+            <button class="btn delete btn-outline-success" data-clear-complete-tasks-button><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>Clear Completed</button>
+            <button class="btn delete btn-outline-danger" data-delete-list-button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>Delete List</button>
+          </div>
         </div>
       </div>
+
+      
+
+      
     </div>
 
    
@@ -75,4 +90,9 @@
       </div>
     </template>
   </body>
+  <footer class="h-100">
+    
+    <div class="position-absolute bottom-0 start-50 translate-middle-x"><h5>Built By <a href="https://ajwdev.netlify.app/" class="badge rounded-pill text-bg-primary">Ashtin JW</a></h5></div>
+    
+  </div></footer>
 </html>
