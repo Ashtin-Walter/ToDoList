@@ -13,14 +13,30 @@
 }
 
 body {
-  
   margin: 0;
   font-family: "Work Sans", sans-serif;
   font-weight: 300;
   font-size: 1.5rem;
+  background-color: #000000;
   color: var(--clr-light);
   display: grid;
-  grid: "header header header header" auto "...... lists  active ......" auto/1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr minmax(100px, 300px) minmax(250px, 500px) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header header header"
+    ". lists active .";
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
 .title {
@@ -47,8 +63,8 @@ body {
 .list-name {
   cursor: pointer;
   background-color: #333;
-  padding: .5rem;
-  margin: .5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
   width: 75%;
   border-radius: 1rem;
   list-style: none;
@@ -65,7 +81,6 @@ form {
 
 .btn {
   cursor: pointer;
-  
 }
 
 .btn.create {
@@ -82,26 +97,26 @@ form {
   opacity: 0.7;
 }
 
-.btn.delete{
+.btn.delete {
   margin-bottom: -1rem;
   transition: all 0.3s ease;
 }
 
-.btn.delete:hover svg{
+.btn.delete:hover svg {
   opacity: 1;
   transform: translateX(0);
-  width:1.3rem;
+  width: 1.3rem;
   padding-right: 5px;
 }
 
-.btn svg{
+.btn svg {
   height: 1.3rem;
   display: inline-block;
   opacity: 0;
   overflow: hidden;
   width: 0;
-  transform: translateX(-20px); /* Initially, hide the icon to the left */
-  transition: all 0.3s ease; /* Apply the smooth transition to all properties */
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
 }
 
 .new {
@@ -114,7 +129,7 @@ form {
   padding: 0.25em;
   transition: border-bottom 150ms ease-in;
   order: 2;
-  
+  width: 200px;
 }
 
 .new::-moz-placeholder {
@@ -123,7 +138,7 @@ form {
 }
 
 .new::placeholder {
-  color: green;
+  color: --clr-light;
   opacity: 0.7;
 }
 
@@ -139,10 +154,37 @@ form {
   opacity: 0.2;
 }
 
+.new.task {
+  margin-bottom: 0.5em;
+}
 
+.new-task-creator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
 
 .new.task {
-  margin-bottom: 0;
+  flex: 1 1 auto;
+  min-width: 150px;
+}
+
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.new.task[type="date"] {
+  max-width: 200px;
+}
+
+.new.task + .new.task {
+  margin-left: 0;
+}
+
+.new.task + button {
+  flex: 0 0 auto;
 }
 
 .active-list {
@@ -150,10 +192,11 @@ form {
 }
 
 .todo-list {
-  --spacer: 2rem;
   grid-area: active;
   background: var(--clr-light);
   color: var(--clr-dark);
+  max-height: 50vh;
+  overflow-y: auto;
 }
 
 .todo-header {
@@ -164,10 +207,10 @@ form {
   justify-content: space-between;
 }
 
+
 .list-title {
   margin: 0 1em 0 0;
 }
-
 
 .todo-body {
   padding: var(--spacer);
@@ -183,6 +226,11 @@ form {
   display: inline-flex;
   align-items: center;
   position: relative;
+  cursor: pointer;
+}
+
+.task label:hover {
+  text-decoration: underline;
 }
 
 .task {
@@ -233,8 +281,6 @@ form {
 .task label::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
   left: 1.5em;
   top: 50%;
   height: 3px;
@@ -249,25 +295,30 @@ form {
   transform-origin: left;
 }
 
-.card-footer{
-  min-height: 3.5rem;
+.task-due-date {
+  margin-left: 1em;
+  font-size: 0.8em;
+  color: var(--clr-warning);
+}
+
+.task-priority {
+  margin-left: 1em;
+  font-size: 0.8em;
+  color: var(--clr-primary);
+}
+
+.card-footer {
+  min-height: 180px;
 }
 
 .delete-stuff {
   display: flex;
   justify-content: space-evenly;
-  
 }
 
-/* rain effect */
-
-body{
-  background: #000;
-  overflow: hidden;
-  width: 100%;
-}
-i{
+i {
   position: absolute;
+  top: 0;
   height: 200px;
   background: linear-gradient(transparent, #fff);
   border-bottom-left-radius: 5px;
@@ -275,20 +326,24 @@ i{
   animation: animate 5s linear infinite;
   z-index: -1;
 }
-i:nth-child(3n + 1){
+
+i:nth-child(3n + 1) {
   background: linear-gradient(transparent, #0ff);
 }
-i:nth-child(3n + 2){
+
+i:nth-child(3n + 2) {
   background: linear-gradient(transparent, #0f0);
 }
-i:nth-child(3n + 3){
+
+i:nth-child(3n + 3) {
   background: linear-gradient(transparent, #f00);
 }
-@keyframes animate{
-  0%{
-      transform: translateY(-200px);
+
+@keyframes animate {
+  0% {
+    transform: translateY(-200px);
   }
-  100%{
-      transform: translateY(calc(100vh + 200px));
+  100% {
+    transform: translateY(calc(100vh + 200px));
   }
 }

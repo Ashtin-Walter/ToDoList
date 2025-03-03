@@ -17,43 +17,39 @@
   </head>
 
   <body class="mainview">
-    <h1 class="title">Stuff I need to do</h1>
+    <div class="container">
+      <h1 class="title">Stuff I need to do</h1>
 
-    <div class="all-tasks text-center">
-      <h2 class="badge text-bg-light">My Lists</h2>
-      <ul class="task-list" data-lists></ul>
+      <div class="all-tasks text-center">
+        <h2 class="badge text-bg-light">My Lists</h2>
+        <ul class="task-list" data-lists></ul>
 
-      <form action="" class="input-group" data-new-list-form>
-        <input 
-          type="text"
-          class="new list w-75 bg-dark text-light"
-          data-new-list-input
-          placeholder="new list name"
-          aria-label="new list name"
-        />
-        <button class="btn create input-group-text" aria-label="create new list">+</button>
-      </form>
-    </div>
+        <form action="" class="input-group" data-new-list-form>
+          <input 
+            type="text"
+            class="new list w-75 bg-dark text-light"
+            data-new-list-input
+            placeholder="new list name"
+            aria-label="new list name"
+          />
+          <button class="btn create input-group-text" aria-label="create new list">+</button>
+        </form>
+      </div>
 
-    <div class="todo-list rounded" data-list-display-container>
-      <div class="card text-center">
-        <div class="card-header d-flex justify-content-between ">
-          
+      <div class="todo-list rounded" data-list-display-container>
+        <div class="card text-center">
+          <div class="card-header d-flex justify-content-between ">
             <h2 class="badge text-bg-dark" data-list-title>Create A New List To Create Tasks</h2>
             <p class="task-count badge text-bg-warning" data-list-count>No tasks </p>
-          
-        </div>
-        <div class="card-body">
-          
-          
-          <p class="card-text"><div class="todo-body">
-            <div class="tasks" data-tasks></div>
-    
-           
-            
-          </div></p>
-          <div class="new-task-creator">
-            <form action="" data-new-task-form>
+          </div>
+          <div class="card-body">
+            <div class="todo-body">
+              <div class="tasks" data-tasks></div>
+            </div>
+          </div>
+          <div class="card-footer text-body-secondary">
+            <div class="new-task-creator">
+              <form action="" data-new-task-form>
                 <input 
                   type="text"
                   data-new-task-input
@@ -61,25 +57,40 @@
                   placeholder="new task name"
                   aria-label="new task name"
                 />
+                <div class="task-details">
+                  <input 
+                    type="date"
+                    data-new-task-due-date-input
+                    class="new task"
+                    placeholder="due date"
+                    aria-label="due date"
+                  />
+                  <select data-new-task-priority-input class="new task">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
                 <button class="btn create" aria-label="create new task">+</button>
               </form>
-        </div>
-
-        </div>
-        <div class="card-footer text-body-secondary">
-          <div class="delete-stuff">
-            <button class="btn delete btn-outline-success" data-clear-complete-tasks-button><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>Clear Completed</button>
-            <button class="btn delete btn-outline-danger" data-delete-list-button><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>Delete List</button>
+            </div>
+            <div class="delete-stuff">
+              <button class="btn delete btn-outline-success" data-clear-complete-tasks-button>
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                </svg>
+                Clear Completed
+              </button>
+              <button class="btn delete btn-outline-danger" data-delete-list-button>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                </svg>
+                Delete List
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
-      
-
-      
-    </div>
-
-   
     </div>
     <template id="task-template">
       <div class="task">
@@ -89,10 +100,10 @@
         </label>
       </div>
     </template>
+    <footer class="h-100">
+      <div class="position-absolute bottom-0 start-50 translate-middle-x">
+        <h5>Built By <a href="https://ajwdev.netlify.app/" class="badge rounded-pill text-bg-primary">Ashtin JW</a></h5>
+      </div>
+    </footer>
   </body>
-  <footer class="h-100">
-    
-    <div class="position-absolute bottom-0 start-50 translate-middle-x"><h5>Built By <a href="https://ajwdev.netlify.app/" class="badge rounded-pill text-bg-primary">Ashtin JW</a></h5></div>
-    
-  </div></footer>
 </html>
