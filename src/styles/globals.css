@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --clr-primary: rgb(99, 102, 241);
+  --clr-secondary: rgb(139, 92, 246);
+  --clr-light: #f4f4f4;
+  --clr-dark: #1f2937;
+  --clr-warning: rgb(239, 68, 68);
+}
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.mainview {
+    margin: 0;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    color: var(--clr-light);
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.drip-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.custom-checkbox {
+  --size: 0.75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: var(--size);
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+
+[type=checkbox]:checked + label .custom-checkbox {
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
+  box-shadow: inset 0 0 0px 2px white;
+}
+
+[type=checkbox]:checked + label {
+  opacity: 0.5;
+}
+
+.task label::after {
+  content: "";
+  position: absolute;
+  left: 1.5em;
+  top: 50%;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 150ms ease-in-out;
+}
+
+[type=checkbox]:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.task-due-date {
+  margin-left: 1em;
+  font-size: 0.8em;
+  color: var(--clr-warning);
+}
+
+.task-priority {
+  margin-left: 1em;
+  font-size: 0.8em;
+  color: var(--clr-primary);
+}
+
+i {
+    position: absolute;
+    top: 0;
+    width: 2px;  /* made thinner */
+    height: 200px;
+    background: linear-gradient(transparent, #fff);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    animation: animate var(--fall-duration, 5s) linear infinite;
+    animation-delay: var(--fall-delay, 0s);
+    opacity: var(--fall-opacity, 1);
+}
+
+i:nth-child(3n + 1) {
+  background: linear-gradient(transparent, #0ff);
+}
+
+i:nth-child(3n + 2) {
+  background: linear-gradient(transparent, #0f0);
+}
+
+i:nth-child(3n + 3) {
+  background: linear-gradient(transparent, #f00);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.task-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.task-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateX(4px);
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(-200px) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--fall-opacity, 1);
+    }
+    90% {
+        opacity: var(--fall-opacity, 1);
+    }
+    100% {
+        transform: translateY(calc(100vh + 200px)) translateX(var(--wind-shift, 20px));
+        opacity: 0;
+    }
+}
