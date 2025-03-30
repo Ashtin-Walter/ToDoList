@@ -38,6 +38,7 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .custom-checkbox {
@@ -94,27 +95,31 @@
 
 i {
     position: absolute;
-    top: 0;
-    width: 2px;  /* made thinner */
-    height: 200px;
-    background: linear-gradient(transparent, #fff);
+    top: -200px;
+    background: linear-gradient(180deg, transparent, rgba(255,255,255,0.8));
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    transform: translateZ(0);
+    will-change: transform;
     animation: animate var(--fall-duration, 5s) linear infinite;
     animation-delay: var(--fall-delay, 0s);
     opacity: var(--fall-opacity, 1);
+    filter: blur(1px);
 }
 
 i:nth-child(3n + 1) {
-  background: linear-gradient(transparent, #0ff);
+    background: linear-gradient(180deg, transparent, rgba(0,255,255,0.8));
+    box-shadow: 0 0 10px rgba(0,255,255,0.3);
 }
 
 i:nth-child(3n + 2) {
-  background: linear-gradient(transparent, #0f0);
+    background: linear-gradient(180deg, transparent, rgba(0,255,0,0.8));
+    box-shadow: 0 0 10px rgba(0,255,0,0.3);
 }
 
 i:nth-child(3n + 3) {
-  background: linear-gradient(transparent, #f00);
+    background: linear-gradient(180deg, transparent, rgba(255,0,0,0.8));
+    box-shadow: 0 0 10px rgba(255,0,0,0.3);
 }
 
 .glass-card {
@@ -146,17 +151,19 @@ i:nth-child(3n + 3) {
 
 @keyframes animate {
     0% {
-        transform: translateY(-200px) translateX(0);
+        transform: translate3d(0, 0, 0);
         opacity: 0;
     }
     10% {
-        opacity: var(--fall-opacity, 1);
+        opacity: var(--fall-opacity);
+        transform: translate3d(0, 100px, 0);
     }
     90% {
-        opacity: var(--fall-opacity, 1);
+        opacity: var(--fall-opacity);
+        transform: translate3d(var(--wind-shift), calc(100vh - 100px), 0);
     }
     100% {
-        transform: translateY(calc(100vh + 200px)) translateX(var(--wind-shift, 20px));
+        transform: translate3d(var(--wind-shift), 100vh, 0);
         opacity: 0;
     }
 }

@@ -1,13 +1,14 @@
-name: Deploy ToDoList
+name: Deploy ToDo List
 
 on:
   push:
     branches:
-      - main 
+      - main  # Deploys when you push to the main branch
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, todo-list]  # Use your self-hosted runner
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -16,13 +17,13 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: npm run build  # Exporting static site
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./out/ 
-          server-dir: /todolist/
+        run: |
+          lftp -e "
+          set ssl:verify-certificate no;
+          open -u '${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}' ${{ secrets.FTP_SERVER }};
+          mirror -R ./out/ /todolist/;
+          bye
+          "

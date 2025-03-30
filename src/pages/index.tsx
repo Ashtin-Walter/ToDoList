@@ -32,6 +32,7 @@ const Home: React.FC = () => {
       dueDate: dueDate || undefined,
       priority,
       createdAt: new Date(),
+      lastModified: new Date(),
     };
     setTasks(prev => [...prev, newTask]);
   };
@@ -75,13 +76,15 @@ const Home: React.FC = () => {
   return (
     <div className="mainview">
       <div className="drip-container">
-        {[...Array(30)].map((_, index) => (
+        {[...Array(40)].map((_, index) => (
           <i key={index} style={{
             left: `${Math.random() * 100}%`,
-            '--fall-delay': `${Math.random() * 5}s`,
-            '--fall-duration': `${3 + Math.random() * 4}s`,
-            '--fall-opacity': 0.3 + Math.random() * 0.7,
-            '--wind-shift': `${-50 + Math.random() * 100}px`
+            width: `${1 + Math.random() * 2}px`,
+            height: `${150 + Math.random() * 100}px`,
+            '--fall-delay': `${Math.random() * 8}s`,
+            '--fall-duration': `${2 + Math.random() * 3}s`,
+            '--fall-opacity': `${0.2 + Math.random() * 0.3}`,
+            '--wind-shift': `${-20 + Math.random() * 40}px`
           } as React.CSSProperties} />
         ))}
       </div>
